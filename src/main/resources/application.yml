@@ -1,0 +1,69 @@
+server:
+  port: 8089
+
+spring:
+  application:
+    name: ecommerce-backend
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/ecommerce_db}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 10MB
+
+jwt:
+  secret: ${JWT_SECRET:change-this-to-a-long-random-secret-key-at-least-256-bits}
+  # 15 minutes — short-lived access tokens; idle users must re-authenticate
+  expiration: ${JWT_EXPIRATION:900000}
+
+app:
+  upload-dir: ${UPLOAD_DIR:uploads}
+
+# WhatsApp — node = Defect Tracker bot; meta = Cloud API
+whatsapp:
+  provider: ${WHATSAPP_PROVIDER:node}
+  api-version: ${WHATSAPP_API_VERSION:v21.0}
+  access-token: ${WHATSAPP_ACCESS_TOKEN:}
+  phone-number-id: ${WHATSAPP_PHONE_NUMBER_ID:}
+  business-account-id: ${WHATSAPP_BUSINESS_ACCOUNT_ID:}
+  # Optional approved template for business-initiated chats (leave empty to send free-form text)
+  template-name: ${WHATSAPP_TEMPLATE_NAME:}
+  template-language: ${WHATSAPP_TEMPLATE_LANGUAGE:en_US}
+  allow-test-fallback: ${WHATSAPP_ALLOW_TEST_FALLBACK:false}
+  # Legacy Node fallback when provider=node
+  api-url: ${WHATSUP_URL:${WHATSAPP_API_URL:http://localhost:3001}}
+  api-key: ${WHATSAPP_API_KEY:}
+  store-number: ${STORE_WHATSAPP_NUMBER:${WHATSAPP_STORE_NUMBER:94766292509}}
+  default-country-code: ${WHATSAPP_DEFAULT_COUNTRY_CODE:94}
+  send-customer-invoice: ${WHATSAPP_SEND_CUSTOMER_INVOICE:true}
+  send-store-notification: ${WHATSAPP_SEND_STORE_NOTIFICATION:true}
+  # Auto-start Node whatsapp-service as a child process (provider=node)
+  managed-node: ${WHATSAPP_MANAGED_NODE:true}
+  service-dir: ${WHATSAPP_SERVICE_DIR:}
+  startup-timeout-seconds: ${WHATSAPP_STARTUP_TIMEOUT_SECONDS:90}
+  auto-npm-install: ${WHATSAPP_AUTO_NPM_INSTALL:true}
+
+logging:
+  level:
+    org.springframework.security: INFO
+    org.flywaydb: INFO
+    com.shop: DEBUG
