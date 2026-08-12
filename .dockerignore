@@ -1,0 +1,13 @@
+.git
+.idea
+.vscode
+.env
+.env.*
+!.env.example
+target
+uploads/*
+!uploads/.gitkeep
+*.md
+.mvn/wrapper/maven-wrapper.jar
+mvnw.cmd
+run.ps1
