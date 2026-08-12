@@ -1,2 +1,3 @@
 org.springframework.boot.env.EnvironmentPostProcessor=\
-com.shop.config.DotenvEnvironmentPostProcessor
+com.shop.config.DotenvEnvironmentPostProcessor,\
+com.shop.config.RailwayEnvironmentPostProcessor

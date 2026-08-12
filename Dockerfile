@@ -14,5 +14,9 @@ WORKDIR /app
 
 COPY --from=build /app/target/*.jar app.jar
 
+# Node/Chrome WhatsApp is not available in this image
+ENV WHATSAPP_MANAGED_NODE=false
+ENV WHATSAPP_PROVIDER=meta
+
 EXPOSE 8089
 ENTRYPOINT ["java", "-jar", "app.jar"]

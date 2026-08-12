@@ -1,5 +1,6 @@
 server:
-  port: 8089
+  # Railway sets PORT; local default stays 8089
+  port: ${PORT:8089}
 
 spring:
   application:
